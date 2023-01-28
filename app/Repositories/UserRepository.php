@@ -10,17 +10,17 @@ class UserRepository
     public function registerUser($request)
     {
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'password' => Hash::make($request['password']),
         ]);
 
         Profile::create([
-            'full_name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'user_id' => $user->id
+            'full_name' => $request['name'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'user_id' => $user['id']
         ]);
 
         return $user;
