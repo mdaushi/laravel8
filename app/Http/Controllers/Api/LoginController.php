@@ -32,4 +32,11 @@ class LoginController extends Controller
 
         return response()->jsonSuccess(['token' => $token->plainTextToken], 'Success');
     }
+
+    public function revokeToken()
+    {
+        auth()->user()->tokens()->delete();
+
+        return response()->jsonSuccess([], 'revoke token berhasil.');
+    }
 }
