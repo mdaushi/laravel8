@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegisteredUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,9 @@ Route::post('login', [LoginController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::post('logout', [LoginController::class, 'revokeToken']);
+
+    Route::group(['prefix' => 'profile'], function() {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::post('/', [ProfileController::class, 'update']);
+    });
 });

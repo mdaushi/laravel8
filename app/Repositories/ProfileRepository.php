@@ -8,7 +8,7 @@ class ProfileRepository
 {
     public function updateProfile($attributes, int $id)
     {
-        $nameFile = isset($attributes['picture']) ? $attributes['picture']->getClientOriginalName() : null;
+        $nameFile = isset($attributes['picture']) ? $attributes['picture']->getClientOriginalName() : auth()->user()->profile->picture;
 
         // update profile
         $profile =  Profile::find($id);

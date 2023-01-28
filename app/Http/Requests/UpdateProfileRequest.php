@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Profile;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -30,6 +31,12 @@ class UpdateProfileRequest extends FormRequest
             'phone' => ['required', 'numeric'],
             'company' => ['required'],
             'devisi' => ['required'],
+            'picture' => [Rule::requiredIf(function() {
+                if(!empty(Profile::find($this->user()->profile->id)->picture)){
+                    return false;
+                }
+                return true;
+            }), 'image', 'mimes:jpg,png']
         ];
     }
 }
