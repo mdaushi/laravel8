@@ -25,4 +25,9 @@ class UserRepository
 
         return $user;
     }
+
+    public function createTokenApi($request)
+    {
+        return User::where('email', $request['email'])->first();
+    }
 }
