@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Models\Document;
+use App\Notifications\SigningDocumentNotification;
 
 class DocumentRepository
 {
@@ -22,6 +23,12 @@ class DocumentRepository
         {
             $doc->addMediaFromRequest('content')->toMediaCollection('document');
         }
+
+        // send notification to signing user
+        // this is an example, using the default template without modification
+        $signing = User::find($request['signing']);
+        $signing->notify(new SigningDocumentNotification());
+        
     }
 
     public function signingList()
