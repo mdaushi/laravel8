@@ -29,6 +29,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 
     // Route Document
     Route::resource('document', DocumentController::class)->except('show');
+    Route::get('document/{id}/verify', [DocumentController::class, 'verify'])->name('document.verify');
     
 });
 

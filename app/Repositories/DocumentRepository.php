@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Models\Document;
 use App\Notifications\SigningDocumentNotification;
+use Carbon\Carbon;
 
 class DocumentRepository
 {
@@ -72,5 +73,12 @@ class DocumentRepository
     public function deleteDocumentById($id)
     {
         return Document::find($id)->delete();
+    }
+
+    public function verifyDocument($id)
+    {
+        return Document::find($id)->update([
+            'signed_at' => Carbon::now()
+        ]);
     }
 }

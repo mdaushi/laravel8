@@ -60,5 +60,11 @@ class DocumentController extends Controller
 
         return redirect()->route('document.index')->with('success', 'Berhasil haapus document!');
     }
+
+    public function verify($id)
+    {
+        $this->documentRepository->verifyDocument($id);
+        return redirect()->route('document.index')->with('success', 'Berhasil verifikasi document!');
+    }
   
 }
