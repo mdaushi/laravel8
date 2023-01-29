@@ -7,58 +7,264 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Dokumentasi
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   arsitektur MVC + repository pattern
+-   authentication features with Breeze
+-   auth api with sanctum
+-   Postman: https://documenter.getpostman.com/view/7711393/2s935hQSjS
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### AUTH
 
-## Learning Laravel
+<details>
+ <summary><code>POST</code> <code><b>/api/register</b></code> <code>Register</code></summary>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+##### Headers
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   Accept: application/json
 
-## Laravel Sponsors
+##### Body
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```JSON
+{
+    "name": "firdaus",
+    "email": "firdaus@gmail.com",
+    "password": "1234567890",
+    "password_confirmation": "1234567890",
+    "phone": "09876543"
+}
+```
 
-### Premium Partners
+##### Example cURL
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+> ```javascript
+>  curl --location --request POST 'http://127.0.0.1:8000/api/register' \
+> --header 'Accept: application/json'
+> ```
 
-## Contributing
+</details>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<details>
+ <summary><code>POST</code> <code><b>/api/login</b></code> <code>Login</code></summary>
 
-## Code of Conduct
+##### Headers
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+-   Accept: application/json
 
-## Security Vulnerabilities
+##### Body
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```JSON
+{
+    "email": "firdaus@gmail.com",
+    "password": "1234567890"
+}
+```
 
-## License
+##### Example cURL
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> ```javascript
+> curl --location --request POST 'http://127.0.0.1:8000/api/login' \
+> --header 'Accept: application/json'
+> ```
+
+</details>
+
+<details>
+ <summary><code>POST</code> <code><b>/api/logout</b></code> <code>Logout</code></summary>
+
+##### Headers
+
+-   Accept: application/json
+-   Authorization: Bearer
+
+##### Example cURL
+
+> ```javascript
+> curl --location --request POST 'http://127.0.0.1:8000/api/logout' \
+> --header 'Accept: application/json' \
+> --header 'Authorization: Bearer '
+> ```
+
+</details>
+
+---
+
+#### PROFILE
+
+<details>
+ <summary><code>GET</code> <code><b>/api/profile</b></code> <code>INDEX</code></summary>
+
+##### Headers
+
+-   Accept : application/json
+-   Authorization : Bearer
+
+</details>
+
+<details>
+ <summary><code>POST</code> <code><b>/api/profile</b></code> <code>UPDATE PROFILE</code></summary>
+
+##### Headers
+
+-   Accept : application/json
+-   Authorization : Bearer
+
+##### Body
+
+```json
+{
+    "picture": "",
+    "full_name": "",
+    "email": "",
+    "phone": "",
+    "devisi": "",
+    "company": ""
+}
+```
+
+##### Example cURL
+
+> ```javascript
+> curl --location --request POST 'http://127.0.0.1:8000/api/profile' \
+> --header 'Accept: application/json' \
+> --header 'Authorization: Bearer '
+> ```
+
+</details>
+
+---
+
+#### DOCUMENT MANAGEMENT
+
+<details>
+  <summary><code>GET</code> <code><b>/api/documents</b></code> <code>INDEX</code></summary>
+
+##### Headers
+
+-   Accept : application/json
+-   Authorization : Bearer
+
+##### Example cURL
+
+> ```javascript
+> curl --location --request GET 'http://127.0.0.1:8000/api/documents' \
+> --header 'Accept: application/json' \
+> --header 'Authorization: Bearer '
+> ```
+
+</details>
+
+<details>
+  <summary><code>POST</code> <code><b>/api/documents</b></code> <code>CREATE</code></summary>
+
+##### Headers
+
+-   Accept : application/json
+-   Authorization : Bearer
+
+##### Body
+
+```json
+{
+    "title": "surat dinas",
+    "content": "file.pdf",
+    "signing": 11
+}
+```
+
+##### Example cURL
+
+> ```javascript
+> curl --location --request POST 'http://127.0.0.1:8000/api/documents' \
+> --header 'Accept: application/json' \
+> --header 'Authorization: Bearer ' \
+> --data-raw ''
+> ```
+
+</details>
+
+<details>
+  <summary><code>PUT</code> <code><b>/api/documents/:id</b></code> <code>UPDATE</code></summary>
+
+##### Headers
+
+-   Accept : application/json
+-   Authorization : Bearer
+
+##### Body
+
+```json
+{
+    "title": "surat dinas",
+    "content": "file.pdf",
+    "signing": 11
+}
+```
+
+##### Example cURL
+
+> ```javascript
+> curl --location --request PUT 'http://127.0.0.1:8000/api/documents/37' \
+> --header 'Accept: application/json' \
+> --header 'Authorization: Bearer '
+> ```
+
+</details>
+
+<details>
+  <summary><code>DELETE</code> <code><b>/api/documents/:id</b></code> <code>DELETE</code></summary>
+
+##### Headers
+
+-   Accept : application/json
+-   Authorization : Bearer
+
+##### Example cURL
+
+> ```javascript
+> curl --location --request DELETE 'http://127.0.0.1:8000/api/documents/37' \
+> --header 'Accept: application/json' \
+> --header 'Authorization: Bearer '
+> ```
+
+</details>
+
+<details>
+  <summary><code>GET</code> <code><b>/api/documents/:id/verify</b></code> <code>VERIFY</code></summary>
+
+##### Headers
+
+-   Accept : application/json
+-   Authorization : Bearer
+
+##### Example cURL
+
+> ```javascript
+> curl --location --request GET 'http://127.0.0.1:8000/api/documents/37/verify' \
+> --header 'Accept: application/json' \
+> --header 'Authorization: Bearer '
+> ```
+
+</details>
+
+<details>
+  <summary><code>GET</code> <code><b>/api/documents/list-signing</b></code> <code>LIST SIGNING</code></summary>
+
+##### Headers
+
+-   Accept : application/json
+-   Authorization : Bearer
+
+##### Example cURL
+
+> ```javascript
+> curl --location --request GET 'http://127.0.0.1:8000/api/documents/list-signing' \
+> --header 'Accept: application/json' \
+> --header 'Authorization: Bearer '
+> ```
+
+</details>
+
+---
