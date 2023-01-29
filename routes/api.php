@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RegisteredUserController;
@@ -31,4 +32,8 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::get('/', [ProfileController::class, 'index']);
         Route::post('/', [ProfileController::class, 'update']);
     });
+
+    Route::resource('documents', DocumentController::class)->except('show');
+    Route::get('documents/list-signing', [DocumentController::class, 'listSigning']);
+    Route::get('documents/{id}/verify', [DocumentController::class, 'verify']);
 });

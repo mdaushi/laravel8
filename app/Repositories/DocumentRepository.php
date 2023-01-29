@@ -32,14 +32,24 @@ class DocumentRepository
         
     }
 
+    private function dataSigningList()
+    {
+        return User::whereNotIn('id', [auth()->user()->id]);
+    }
+
     public function signingList()
     {
-        return User::whereNotIn('id', [auth()->user()->id])->pluck('email', 'id');
+        return $this->dataSigningList()->pluck('email', 'id');
+    }
+
+    public function signingListArray()
+    {
+        return $this->dataSigningList()->get(['id', 'email']);
     }
 
     public function allDocument()
     {
-        return Document::with(['signing_id', 'uploader_id'])->where('uploader', auth()->user()->id)->orWhere('signing', auth()->user()->id)->get();
+        return Document::with(['signing_id.profile', 'uploader_id.profile'])->where('uploader', auth()->user()->id)->orWhere('signing', auth()->user()->id)->get();
     }
 
     public function getDocumentById(int $id)
