@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 
     // Route Profile
     Route::resource('profile', ProfileController::class)->only(['index', 'edit', 'update']);
+
+    // Route Document
+    Route::resource('document', DocumentController::class)->except('show');
+    
 });
 
 require __DIR__.'/auth.php';
